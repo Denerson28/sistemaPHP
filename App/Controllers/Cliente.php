@@ -145,7 +145,7 @@ class Cliente extends BaseController
 
                     //$hash_senha = password_hash($_POST['senha'], PASSWORD_ARGON2I); // gerar hash senha enviada
 
-                    $cliente = new \App\models\Cliente(); // criar uma instância de usuário
+                    $cliente = new \App\Models\Cliente(); // criar uma instância de usuário
                     $cliente->setNome($_POST['nome']);   // setar os valores
                     $cliente->setCpf($_POST['cpf']);
                     $cliente->setEndereco($_POST['endereco']);
@@ -259,7 +259,7 @@ class Cliente extends BaseController
                 if ($post_validado === true) :  // verificar dados do cliente
 
                     // criando um objeto cliente
-                    $cliente = new \App\models\Cliente();
+                    $cliente = new \App\Models\Cliente();
                     $cliente->setNome($_POST['nome_alteracao']);
                     $cliente->setCpf($_POST['cpf_alteracao']);
                     $cliente->setEndereco($_POST['endereco_alteracao']);

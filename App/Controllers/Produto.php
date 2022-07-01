@@ -9,8 +9,23 @@ use GUMP as Validador;
 class Produto extends BaseController{
 
     protected $filters = [
-        'nome' => 'trim|sanitize_string',
+        'nome_produto' => 'trim|sanitize_string',
         'descricao' => 'trim|sanitize_string',
+        'preco_compra' => 'trim',
+        'preco_venda' => 'trim',
+        'quantidade_disponivel' => 'trim',
+        'liberado_venda' => 'trim',
+        'id_categoria' => 'trim',
+    ];
+
+    protected $rules = [
+        'nome_produto' => 'required|min_len, 1',
+        'descricao' => 'required|min_len, 1',
+        'preco_compra' => 'required|min_len, 1|float',
+        'preco_venda' => 'required|min_len, 1|float',
+        'quantidade_disponivel' => 'required|min_len, 1|integer',
+        'liberado_venda' => 'required|max_len, 1',
+        'id_categoria' => 'required|max_len, 10|integer',
     ];
 
 
@@ -157,6 +172,7 @@ class Produto extends BaseController{
                 $filters = [
                     'nome_produto_alteracao' => 'trim|sanitize_string',
                     'descricao_alteracao' => 'trim|sanitize_string',
+                    ''
                 ];
 
                 $rules = [
@@ -171,7 +187,7 @@ class Produto extends BaseController{
                 if ($post_validado === true) :  // verificar dados do produto
 
                     // criando um objeto produto
-                    $produto = new \App\models\Produto();
+                    $produto = new \App\Models\Produto();
                     $produto->setNomeProduto($_POST['nome_produto_alteracao']);
                     $produto->setDescricao($_POST['descricao_alteracao']);
                     $produto->setPrecoCompra($_POST['preco_compra_alteracao']);
@@ -207,6 +223,58 @@ class Produto extends BaseController{
                     $data['id_categoria'] = $produto['id_categoria'];
                     $data['id'] =  $_POST['id_alteracao'];
                     $data['status'] = false;
+                    $data['erros'] = $erros;
+                    echo json_encode($data);
+                    exit();
+                endif;
+            else :
+                die("Erro 404");
+            endif;
+
+        else :
+            Funcoes::redirect("Home");
+        endif;
+    }
+
+    public function gravarInclusao()
+    {
+     
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') :
+   
+            if ($_POST['CSRF_token'] == $_SESSION['CSRF_token']) :
+
+                $validacao = new Validador("pt-br");
+                $post_filtrado = $validacao->filter($_POST, $this->filters);
+                
+                $post_validado = $validacao->validate($post_filtrado, $this->rules);
+
+                if ($post_validado === true) :  // verificar dados da produto
+   
+                    //$hash_senha = password_hash($_POST['senha'], PASSWORD_ARGON2I); // gerar hash senha enviada
+
+                    $produto = new \App\Models\Produto(); // criar uma instância de usuário
+                    $produto->setNomeProduto($_POST['nome_produto']);
+                    $produto->setDescricao($_POST['descricao']);   // setar os valores
+                    $produto->setPrecoCompra($_POST['preco_compra']);   // setar os valores// setar os valores
+                    $produto->setPrecoVenda($_POST['preco_venda']);   // setar os valores
+                    $produto->setQuantidadeDisponivel($_POST['quantidade_disponivel']);   // setar os valores
+                    $produto->setLiberadoVenda($_POST['liberado_venda']);   // setar os valores
+                    $produto->setIdCategoria($_POST['id_categoria']);   // setar os valores
+                    $produtoModel = $this->model("ProdutoModel"); 
+                    $produtoModel->create($produto); // incluir usuário no BD
+                    //$hashId = hash('sha512', $chaveGerada);  // calcular o hash da id (chave primária) gerada
+                    //$categoriaModel->createHashID($chaveGerada, $hashId);
+
+                    $data['status'] = true;          // retornar inclusão realizada
+                    echo json_encode($data);
+                    exit();
+                else :  // validação dos dados falhou
+                    $erros = $validacao->get_errors_array();  // obter erros de validação
+                    $erros = implode("<br>", $erros);         // gerar uma string com os erros
+                    $_SESSION['CSRF_token'] = Funcoes::gerarTokenCSRF();
+
+                    $data['token'] = $_SESSION['CSRF_token'];  // gerar CSRF
+                    $data['status'] = false;        // retornar erros
                     $data['erros'] = $erros;
                     echo json_encode($data);
                     exit();

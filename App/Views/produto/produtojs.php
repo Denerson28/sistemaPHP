@@ -9,7 +9,7 @@
             if (ajax_request.readyState == 4 && ajax_request.status == 200) {
                 var response = JSON.parse(ajax_request.responseText);
                 document.getElementById('contudoTabela').innerHTML = response.corpoTabela;
-                document.getElementById('categorias').innerHTML = response.corpoCategoria;
+                document.getElementById('id_categoria').innerHTML = response.corpoCategoria;
                 document.getElementById('pagination_link').innerHTML = response.links;
 
             }
@@ -57,12 +57,14 @@
 
         // salvar os dados da inclusão
         $('#btSalvarInclusao').on('click', function() {
+
             $.ajax({
                 url: "<?= url('salvarinclusaoproduto') ?>", // chama o método para inclusão
                 type: "POST",
                 data: $('#formInclusao').serialize(), //codifica o formulário como uma string para envio.
                 dataType: "JSON",
                 success: function(data) {
+                    
                     $('[name="CSRF_token"]').val(data.token); // // Update CSRF hash
                     if (data.status) //if success close modal and reload ajax table
                     {  Swal.fire({
@@ -76,7 +78,8 @@
                         $('[name="mensagem_erro"]').html(data.erros);
                     }
                 },
-                error: function(data) {
+                error: function(error) {
+                    console.log(error);
                     Swal.fire({
                         title: "Erro",
                         text: "Erro Inesperado",

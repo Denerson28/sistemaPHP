@@ -121,7 +121,7 @@ class Categoria extends BaseController
 
                     //$hash_senha = password_hash($_POST['senha'], PASSWORD_ARGON2I); // gerar hash senha enviada
 
-                    $categoria = new \App\models\Categoria(); // criar uma instância de usuário
+                    $categoria = new \App\Models\Categoria(); // criar uma instância de usuário
                     $categoria->setNomeCategoria($_POST['nome_categoria']);   // setar os valores
                     $categoriaModel = $this->model("CategoriaModel"); 
                     $categoriaModel->create($categoria); // incluir usuário no BD
@@ -203,7 +203,7 @@ class Categoria extends BaseController
                 if ($post_validado === true) :  // verificar dados do categoria
 
                     // criando um objeto categoria
-                    $categoria = new \App\models\Categoria();
+                    $categoria = new \App\Models\Categoria();
                     $categoria->setNomeCategoria($_POST['nome_categoria_alteracao']);
                     $categoria->setId($_POST['id_alteracao']);
 

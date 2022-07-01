@@ -145,7 +145,7 @@ class Fornecedor extends BaseController
 
                     //$hash_senha = password_hash($_POST['senha'], PASSWORD_ARGON2I); // gerar hash senha enviada
 
-                    $fornecedor = new \App\models\Fornecedor(); // criar uma instância de usuário
+                    $fornecedor = new \App\Models\Fornecedor(); // criar uma instância de usuário
                     $fornecedor->setRazaoSocial($_POST['razao_social']);   // setar os valores
                     $fornecedor->setCnpj($_POST['cnpj']);
                     $fornecedor->setEndereco($_POST['endereco']);
@@ -259,7 +259,7 @@ class Fornecedor extends BaseController
                 if ($post_validado === true) :  // verificar dados do fornecedor
 
                     // criando um objeto fornecedor
-                    $fornecedor = new \App\models\Fornecedor();
+                    $fornecedor = new \App\Models\Fornecedor();
                     $fornecedor->setRazaoSocial($_POST['razao_social_alteracao']);
                     $fornecedor->setCnpj($_POST['cnpj_alteracao']);
                     $fornecedor->setEndereco($_POST['endereco_alteracao']);

@@ -148,7 +148,7 @@ class Venda extends BaseController
 
                     //$hash_senha = password_hash($_POST['senha'], PASSWORD_ARGON2I); // gerar hash senha enviada
 
-                    $venda = new \App\models\Venda(); // criar uma instância da venda
+                    $venda = new \App\Models\Venda(); // criar uma instância da venda
                     $venda->setQuantidadeVenda($_POST['quantidade_venda']);   // setar os valores
                     $venda->setDataVenda($_POST['data_venda']);
                     $venda->setValorVenda($_POST['valor_venda']);
@@ -163,7 +163,7 @@ class Venda extends BaseController
                     //Alterar preço de venda e quantidade disponível do produto
                     $produtoModel = $this->model("ProdutoModel");
                     $produto_aux = $produtoModel->get($venda->getIdProduto());
-                    $produto = new \App\models\Produto();
+                    $produto = new \App\Models\Produto();
                     $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] - $venda->getQuantidadeVenda());
                     $produto->setNomeProduto($produto_aux["nome_produto"]);
                     $produto->setDescricao($produto_aux["descricao"]);
@@ -266,12 +266,12 @@ class Venda extends BaseController
                     $vendaModel = $this->model("VendaModel");
 
                     //Criando já o objeto venda_nova para pegar o id do campo e usar para pegar as informações da venda_antiga
-                    $venda_nova = new \App\models\Venda();
+                    $venda_nova = new \App\Models\Venda();
                     $venda_nova->setId($_POST['id_alteracao']);
 
                     //Criando um objeto venda para pegar os valores da venda antes de ser atualizada e usar para atualizar o produto
                     $venda_aux = $vendaModel->get($venda_nova->getId());
-                    $venda_antiga = new \App\models\Venda(); // criar uma instância da venda
+                    $venda_antiga = new \App\Models\Venda(); // criar uma instância da venda
                     $venda_antiga->setQuantidadeVenda($venda_aux['quantidade_venda']);   // setar os valores que importam
                     //$venda->setDataVenda($venda_aux['data_venda']);
                     $venda_antiga->setValorVenda($venda_aux['valor_venda']);
@@ -281,7 +281,7 @@ class Venda extends BaseController
                     //Criando objeto produto para atualizar quantidade disponível do produto antes de atualizar a venda
                     $produtoModel = $this->model("ProdutoModel");
                     $produto_aux = $produtoModel->get($venda_antiga->getIdProduto());
-                    $produto = new \App\models\Produto();
+                    $produto = new \App\Models\Produto();
                     $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] + $venda_antiga->getQuantidadeVenda());
                     $produto->setNomeProduto($produto_aux["nome_produto"]);
                     $produto->setDescricao($produto_aux["descricao"]);
@@ -305,7 +305,7 @@ class Venda extends BaseController
                     //Alterar preço de venda e quantidade disponível do produto
                     $produtoModel = $this->model("ProdutoModel");
                     $produto_aux = $produtoModel->get($venda_nova->getIdProduto());
-                    $produto = new \App\models\Produto();
+                    $produto = new \App\Models\Produto();
                     $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] - $venda_nova->getQuantidadeVenda());
                     $produto->setNomeProduto($produto_aux["nome_produto"]);
                     $produto->setDescricao($produto_aux["descricao"]);
@@ -366,7 +366,7 @@ class Venda extends BaseController
 
             //Criando um objeto venda para pegar os valores da venda que vai ser deletada para atualizar o produto
             $venda_aux = $vendaModel->get($id);
-            $venda = new \App\models\Venda(); // criar uma instância da venda
+            $venda = new \App\Models\Venda(); // criar uma instância da venda
             $venda->setQuantidadeVenda($venda_aux['quantidade_venda']);   // setar os valores
             //$venda->setDataVenda($venda_aux['data_venda']);
             $venda->setValorVenda($venda_aux['valor_venda']);
@@ -377,7 +377,7 @@ class Venda extends BaseController
             //Criando objeto produto para atualizar quantidade disponível do produto antes de deletar a venda
             $produtoModel = $this->model("ProdutoModel");
             $produto_aux = $produtoModel->get($venda->getIdProduto());
-            $produto = new \App\models\Produto();
+            $produto = new \App\Models\Produto();
             $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] + $venda->getQuantidadeVenda());
             $produto->setNomeProduto($produto_aux["nome_produto"]);
             $produto->setDescricao($produto_aux["descricao"]);

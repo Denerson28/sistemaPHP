@@ -36,18 +36,18 @@
                     <div class="form-group">
                         <label for="nome_produto">Nome</label>
                         <input type="text" class="form-control" id="nome_produto" name="nome_produto">
-                        <label for="descricao_produto">Descrição</label>
-                        <input type="text" class="form-control" id="descricao_produto" name="descricao_produto">
-                        <label for="preco_compra_produto">Preço Compra</label>
-                        <input type="number" class="form-control" id="preco_compra_produto" name="preco_compra_produto">
-                        <label for="preco_venda_produto">Preço Venda</label>
-                        <input type="number" class="form-control" id="preco_venda_produto" name="preco_venda_produto">
-                        <label for="quantidade_disponivel_produto">Quantidade Disponível</label>
-                        <input type="number" class="form-control" id="quantidade_disponivel_produto" name="quantidade_disponivel_produto">
-                        <label for="liberado_venda_produto">Liberado Venda? (S/N)</label>
-                        <input type="text" class="form-control" id="liberado_venda_produto" name="liberado_venda_produto">
-                        <label for="categoria_produto">Categoria do Produto</label> <br>
-                        <select name="categorias" id="categorias">
+                        <label for="descricao">Descrição</label>
+                        <input type="text" class="form-control" id="descricao" name="descricao">
+                        <label for="preco_compra">Preço Compra</label>
+                        <input type="number" class="form-control" id="preco_compra" name="preco_compra">
+                        <label for="preco_venda">Preço Venda</label>
+                        <input type="number" class="form-control" id="preco_venda" name="preco_venda">
+                        <label for="quantidade_disponivel">Quantidade Disponível</label>
+                        <input type="number" class="form-control" id="quantidade_disponivel" name="quantidade_disponivel">
+                        <label for="liberado_venda">Liberado Venda? (S/N)</label>
+                        <input type="text" class="form-control" id="liberado_venda" name="liberado_venda">
+                        <label for="id_categoria">Categoria do Produto</label> <br>
+                        <select name="id_categoria" id="id_categoria">
                         </select>
                     </div>
                 </form>

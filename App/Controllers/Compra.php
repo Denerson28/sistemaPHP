@@ -148,7 +148,7 @@ class Compra extends BaseController
 
                     //$hash_senha = password_hash($_POST['senha'], PASSWORD_ARGON2I); // gerar hash senha enviada
 
-                    $compra = new \App\models\Compra(); // criar uma instância da compra
+                    $compra = new \App\Models\Compra(); // criar uma instância da compra
                     $compra->setQuantidadeCompra($_POST['quantidade_compra']);   // setar os valores
                     $compra->setDataCompra($_POST['data_compra']);
                     $compra->setValorCompra($_POST['valor_compra']);
@@ -163,7 +163,7 @@ class Compra extends BaseController
                     //Alterar preço de compra e quantidade disponível do produto
                     $produtoModel = $this->model("ProdutoModel");
                     $produto_aux = $produtoModel->get($compra->getIdProduto());
-                    $produto = new \App\models\Produto();
+                    $produto = new \App\Models\Produto();
                     $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] + $compra->getQuantidadeCompra());
                     $produto->setNomeProduto($produto_aux["nome_produto"]);
                     $produto->setDescricao($produto_aux["descricao"]);
@@ -266,12 +266,12 @@ class Compra extends BaseController
                     $compraModel = $this->model("CompraModel");
 
                     //Criando já o objeto compra_nova para pegar o id do campo e usar para pegar as informações da compra_antiga
-                    $compra_nova = new \App\models\Compra();
+                    $compra_nova = new \App\Models\Compra();
                     $compra_nova->setId($_POST['id_alteracao']);
 
                     //Criando um objeto compra para pegar os valores da compra antes de ser atualizada e usar para atualizar o produto
                     $compra_aux = $compraModel->get($compra_nova->getId());
-                    $compra_antiga = new \App\models\Compra(); // criar uma instância da compra
+                    $compra_antiga = new \App\Models\Compra(); // criar uma instância da compra
                     $compra_antiga->setQuantidadeCompra($compra_aux['quantidade_compra']);   // setar os valores que importam
                     $compra_antiga->setValorCompra($compra_aux['valor_compra']);
                     $compra_antiga->setIdProduto($compra_aux['id_produto']);
@@ -279,7 +279,7 @@ class Compra extends BaseController
                     //Criando objeto produto para atualizar quantidade disponível do produto antes de atualizar a venda
                     $produtoModel = $this->model("ProdutoModel");
                     $produto_aux = $produtoModel->get($compra_antiga->getIdProduto());
-                    $produto = new \App\models\Produto();
+                    $produto = new \App\Models\Produto();
                     $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] - $compra_antiga->getQuantidadeCompra());
                     $produto->setNomeProduto($produto_aux["nome_produto"]);
                     $produto->setDescricao($produto_aux["descricao"]);
@@ -302,7 +302,7 @@ class Compra extends BaseController
                     //Alterar preço de compra e quantidade disponível do produto
                     $produtoModel = $this->model("ProdutoModel");
                     $produto_aux = $produtoModel->get($compra_nova->getIdProduto());
-                    $produto = new \App\models\Produto();
+                    $produto = new \App\Models\Produto();
                     $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] + $compra_nova->getQuantidadeCompra());
                     $produto->setNomeProduto($produto_aux["nome_produto"]);
                     $produto->setDescricao($produto_aux["descricao"]);
@@ -363,7 +363,7 @@ class Compra extends BaseController
 
             //Criando um objeto compra para pegar os valores da compra que vai ser deletada para atualizar o produto
             $compra_aux = $compraModel->get($id);
-            $compra = new \App\models\Compra(); // criar uma instância da compra
+            $compra = new \App\Models\Compra(); // criar uma instância da compra
             $compra->setQuantidadeCompra($compra_aux['quantidade_compra']);   // setar os valores
             $compra->setValorCompra($compra_aux['valor_compra']);
             $compra->setIdProduto($compra_aux['id_produto']);
@@ -371,7 +371,7 @@ class Compra extends BaseController
             //Criando objeto produto para atualizar quantidade disponível do produto antes de deletar a compra
             $produtoModel = $this->model("ProdutoModel");
             $produto_aux = $produtoModel->get($compra->getIdProduto());
-            $produto = new \App\models\Produto();
+            $produto = new \App\Models\Produto();
             $produto->setQuantidadeDisponivel($produto_aux["quantidade_disponível"] - $compra->getQuantidadeCompra());
             $produto->setNomeProduto($produto_aux["nome_produto"]);
             $produto->setDescricao($produto_aux["descricao"]);
