@@ -42,8 +42,8 @@
                         <input type="number" class="form-control" id="preco_compra" name="preco_compra">
                         <label for="preco_venda">Preço Venda</label>
                         <input type="number" class="form-control" id="preco_venda" name="preco_venda">
-                        <label for="quantidade_disponivel">Quantidade Disponível</label>
-                        <input type="number" class="form-control" id="quantidade_disponivel" name="quantidade_disponivel">
+                        <label for="quantidade_disponível">Quantidade Disponível</label>
+                        <input type="number" class="form-control" id="quantidade_disponível" name="quantidade_disponível">
                         <label for="liberado_venda">Liberado Venda? (S/N)</label>
                         <input type="text" class="form-control" id="liberado_venda" name="liberado_venda">
                         <label for="id_categoria">Categoria do Produto</label> <br>
@@ -80,8 +80,21 @@
                     <input type="hidden" id="id_alteracao" name="id_alteracao" value="" />
 
                     <div class="form-group">
-                        <label for="nome_produto_alteracao">Nome*</label>
+                    <label for="nome_produto_alteracao">Nome</label>
                         <input type="text" class="form-control" id="nome_produto_alteracao" name="nome_produto_alteracao">
+                        <label for="descricao_alteracao">Descrição</label>
+                        <input type="text" class="form-control" id="descricao_alteracao" name="descricao_alteracao">
+                        <label for="preco_compra_alteracao">Preço Compra</label>
+                        <input type="number" class="form-control" id="preco_compra_alteracao" name="preco_compra_alteracao">
+                        <label for="preco_venda_alteracao">Preço Venda</label>
+                        <input type="number" class="form-control" id="preco_venda_alteracao" name="preco_venda_alteracao">
+                        <label for="quantidade_disponível_alteracao">Quantidade Disponível</label>
+                        <input type="number" class="form-control" id="quantidade_disponível_alteracao" name="quantidade_disponível_alteracao">
+                        <label for="liberado_venda_alteracao">Liberado Venda? (S/N)</label>
+                        <input type="text" class="form-control" id="liberado_venda_alteracao" name="liberado_venda_alteracao">
+                        <label for="id_categoria_alteracao">Categoria do Produto</label> <br>
+                        <select name="id_categoria_alteracao" id="id_categoria_alteracao">
+                        </select>
                     </div>
                 </form>
             </div>

@@ -13,7 +13,7 @@ class Produto extends BaseController{
         'descricao' => 'trim|sanitize_string',
         'preco_compra' => 'trim',
         'preco_venda' => 'trim',
-        'quantidade_disponivel' => 'trim',
+        'quantidade_disponível' => 'trim',
         'liberado_venda' => 'trim',
         'id_categoria' => 'trim',
     ];
@@ -23,7 +23,7 @@ class Produto extends BaseController{
         'descricao' => 'required|min_len, 1',
         'preco_compra' => 'required|min_len, 1|float',
         'preco_venda' => 'required|min_len, 1|float',
-        'quantidade_disponivel' => 'required|min_len, 1|integer',
+        'quantidade_disponível' => 'required|min_len, 1|integer',
         'liberado_venda' => 'required|max_len, 1',
         'id_categoria' => 'required|max_len, 10|integer',
     ];
@@ -151,7 +151,7 @@ class Produto extends BaseController{
             $data['descricao'] = $produto['descricao'];
             $data['preco_compra'] = $produto['preco_compra'];
             $data['preco_venda'] = $produto['preco_venda'];
-            $data['quantidade_disponivel'] = $produto['quantidade_disponivel'];
+            $data['quantidade_disponível'] = $produto['quantidade_disponível'];
             $data['token'] = $_SESSION['CSRF_token'];
             $data['id_categoria'] = $produto['id_categoria'];
             echo json_encode($data);
@@ -172,11 +172,21 @@ class Produto extends BaseController{
                 $filters = [
                     'nome_produto_alteracao' => 'trim|sanitize_string',
                     'descricao_alteracao' => 'trim|sanitize_string',
-                    ''
+                    'preco_compra_alteracao' => 'trim',
+                    'preco_venda_alteracao' => 'trim',
+                    'quantidade_disponível_alteracao' => 'trim',
+                    'liberado_venda_alteracao' => 'trim',
+                    'id_categoria_alteracao' => 'trim',
                 ];
-
+            
                 $rules = [
-                    'liberado_venda' => 'required|exact_len,1',
+                    'nome_produto_alteracao' => 'required|min_len, 1',
+                    'descricao_alteracao' => 'required|min_len, 1',
+                    'preco_compra_alteracao' => 'required|min_len, 1|float',
+                    'preco_venda_alteracao' => 'required|min_len, 1|float',
+                    'quantidade_disponível_alteracao' => 'required|min_len, 1|integer',
+                    'liberado_venda_alteracao' => 'required|max_len, 1',
+                    'id_categoria_alteracao' => 'required|max_len, 10|integer',
                 ];
 
                 $validacao = new Validador("pt-br");
@@ -188,16 +198,18 @@ class Produto extends BaseController{
 
                     // criando um objeto produto
                     $produto = new \App\Models\Produto();
+                    $produto->setId($_POST['id_alteracao']);
                     $produto->setNomeProduto($_POST['nome_produto_alteracao']);
                     $produto->setDescricao($_POST['descricao_alteracao']);
                     $produto->setPrecoCompra($_POST['preco_compra_alteracao']);
-                    $produto->setPrecoVenda($_POST['preco_Venda_alteracao']);
-                    $produto->setQuantidadeDisponivel($_POST['quantidade_disponivel_alteracao']);
+                    $produto->setPrecoVenda($_POST['preco_venda_alteracao']);
+                    $produto->setQuantidadeDisponivel($_POST['quantidade_disponível_alteracao']);
                     $produto->setLiberadoVenda($_POST['liberado_venda_alteracao']);
                     $produto->setIdCategoria($_POST['id_categoria_alteracao']);
 
                     $produtoModel = $this->model("produtoModel");
 
+   
                     $produtoModel->update($produto);
 
                     $data['status'] = true;
@@ -218,7 +230,7 @@ class Produto extends BaseController{
                     $data['descricao'] = $produto['descricao'];
                     $data['preco_compra'] = $produto['preco_compra'];
                     $data['preco_venda'] = $produto['preco_venda'];
-                    $data['quantidade_disponivel'] = $produto['quantidade_disponivel'];
+                    $data['quantidade_disponível'] = $produto['quantidade_disponível'];
                     $data['liberado_venda'] = $produto['liberado_venda'];
                     $data['id_categoria'] = $produto['id_categoria'];
                     $data['id'] =  $_POST['id_alteracao'];
@@ -257,7 +269,7 @@ class Produto extends BaseController{
                     $produto->setDescricao($_POST['descricao']);   // setar os valores
                     $produto->setPrecoCompra($_POST['preco_compra']);   // setar os valores// setar os valores
                     $produto->setPrecoVenda($_POST['preco_venda']);   // setar os valores
-                    $produto->setQuantidadeDisponivel($_POST['quantidade_disponivel']);   // setar os valores
+                    $produto->setQuantidadeDisponivel($_POST['quantidade_disponível']);   // setar os valores
                     $produto->setLiberadoVenda($_POST['liberado_venda']);   // setar os valores
                     $produto->setIdCategoria($_POST['id_categoria']);   // setar os valores
                     $produtoModel = $this->model("ProdutoModel"); 
@@ -282,6 +294,27 @@ class Produto extends BaseController{
             else :
                 die("Erro 404");
             endif;
+
+        else :
+            Funcoes::redirect("Home");
+        endif;
+    }
+
+    public function excluirProduto($data)
+    {
+        // trata a as solicitações POST
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') :
+
+            $id = $data['id'];
+
+            $produtoModel = $this->model("ProdutoModel");
+
+            $produtoModel->delete($id);
+
+            $data = array();
+            $data['status'] = true;
+            echo json_encode($data);
+            exit();
 
         else :
             Funcoes::redirect("Home");
