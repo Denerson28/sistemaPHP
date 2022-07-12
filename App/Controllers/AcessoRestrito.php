@@ -11,15 +11,13 @@ class AcessoRestrito extends BaseController
     protected $filters = [
         //'email' => 'trim|sanitize_email',
         'cpf' => 'trim',
-        'senha' => 'trim|sanitize_string',
-        'captcha' => 'trim|sanitize_string'
+        'senha' => 'trim|sanitize_string'
     ];
 
     protected $rules = [
         //'email'    => 'required|min_len,8|max_len,255',
         'cpf' => 'required',
-        'senha'  => 'required',
-        'captcha'  => 'required|validar_CAPTCHA_CODE'
+        'senha'  => 'required'
     ];
 
 
@@ -30,14 +28,10 @@ class AcessoRestrito extends BaseController
 
     public function login()
     {
-        // gera o CAPTCHA_CODE e guarda na sessão 
-        $_SESSION['CAPTCHA_CODE'] = Funcoes::gerarCaptcha();
-        $imagem = Funcoes::gerarImgCaptcha($_SESSION['CAPTCHA_CODE']);
         // gera o CSRF_token e guarda na sessão
         $_SESSION['CSRF_token'] = Funcoes::gerarTokenCSRF();
-        $data = ['imagem' => $imagem];
         // chama a view
-        $this->view('acessorestrito/login', $data);
+        $this->view('acessorestrito/login');
     }
 
     public function logar()
@@ -97,11 +91,8 @@ class AcessoRestrito extends BaseController
 
                     else :
                         $mensagem = ["CPF e/ou Senha incorreta"];
-                        $_SESSION['CAPTCHA_CODE'] = Funcoes::gerarCaptcha(); // guarda o captcha_code na sessão 
-                        $imagem = Funcoes::gerarImgCaptcha($_SESSION['CAPTCHA_CODE']);
                         $_SESSION['CSRF_token'] = Funcoes::gerarTokenCSRF();
                         $data = [
-                            'imagem' => $imagem,
                             'mensagens' => $mensagem
                         ];
                         
@@ -113,11 +104,8 @@ class AcessoRestrito extends BaseController
                 endif;
             else : // erro de validação
                 $mensagem = $validacao->get_errors_array();
-                $_SESSION['CAPTCHA_CODE'] = Funcoes::gerarCaptcha(); // guarda o captcha_code na sessão 
-                $imagem = Funcoes::gerarImgCaptcha($_SESSION['CAPTCHA_CODE']);
                 $_SESSION['CSRF_token'] = Funcoes::gerarTokenCSRF();
                 $data = [
-                    'imagem' => $imagem,
                     'mensagens' => $mensagem
                 ];
 

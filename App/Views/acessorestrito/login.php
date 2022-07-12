@@ -28,14 +28,6 @@ if (isset($data['mensagens'])) { ?>
     </div>
 
     <div class="form-group">
-      <?php echo $data['imagem'] ?>
-    </div>
-
-    <div class="form-group">
-      <input id="captcha" class="form-control" type="text" name="captcha" placeholder="Digite o código acima">
-    </div>
-
-    <div class="form-group">
     <button type="submit" class="btn btn-primary">Logar</button>
     </div>
 

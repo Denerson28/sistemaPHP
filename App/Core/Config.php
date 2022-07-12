@@ -25,10 +25,10 @@ define("FONTAWESOME", URL_BASE."/public/fontawesome/css/all.css");
 define('CSRF_TOKEN_SECRET', 'iyHS4##SiPcV9tIZ');
 
 // Caminho para a imagem Captcha
-define('DIR_IMG_CAPTCHA', "E:/wamp64/www/sistemaVendas/App/writable/");
+define('DIR_IMG_CAPTCHA', "D:/Ferramentas/wamp64/www/sistemaVendas/App/writable/");
 
 // Caminho para a imagem upload
-define('DIR_IMG_UPLOAD', "E:/wamp64/www/sistemaVendas/public/upload/");
+define('DIR_IMG_UPLOAD', "D:/Ferramentas/wamp64/www/sistemaVendas/public/upload/");
 
 // URL imagem upload
 define('URL_IMG_UPLOAD', "http://localhost/sistemaVendas/upload/");
