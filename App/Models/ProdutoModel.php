@@ -55,10 +55,11 @@ class ProdutoModel extends BaseModel{
 
     public function update($produto)
     {
+    
         try {
             $sql = "UPDATE produtos SET nome_produto = ?, descricao = ?, preco_compra = ?, preco_venda = ?, quantidade_disponível = ?, liberado_venda = ?, id_categoria = ? WHERE id = ?";
             $conn = ProdutoModel::getConexao();
-
+            
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(1,$produto->getNomeProduto());
             $stmt->bindValue(2,$produto->getDescricao());
@@ -75,14 +76,14 @@ class ProdutoModel extends BaseModel{
         }
     }
     
-    public function delete($produto)
+    public function delete($id)
     {
         try {
             $sql = "DELETE FROM produtos WHERE id = ?";
             $conn = ProdutoModel::getConexao();
 
             $stmt = $conn->prepare($sql);
-            $stmt->bindValue(1, $produto->getId());
+            $stmt->bindValue(1, $id);
             $stmt->execute();
             $conn = null;
         } catch (PDOException $e) {

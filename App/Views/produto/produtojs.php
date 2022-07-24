@@ -10,6 +10,7 @@
                 var response = JSON.parse(ajax_request.responseText);
                 document.getElementById('contudoTabela').innerHTML = response.corpoTabela;
                 document.getElementById('id_categoria').innerHTML = response.corpoCategoria;
+                document.getElementById('id_categoria_alteracao').innerHTML = response.corpoCategoria;
                 document.getElementById('pagination_link').innerHTML = response.links;
 
             }
@@ -101,23 +102,33 @@
 
             var id = $(this).attr("data-id");
 
-            $("#nome_categoria_alteracao").val("");
+            $("#nome_produto_alteracao").val("");
+            $("#descricao_alteracao").val("");
+            $("#preco_compra_alteracao").val("");
+            $("#preco_venda_alteracao").val("");
+            $("#quantidade_disponível_alteracao").val("");
+            $("#liberado_venda_alteracao").val("");
+            $("#id_categoria_alteracao").val("");
             $("#mensagem_erro_alteracao").html("");
             $("#mensagem_erro_alteracao").removeClass("alert alert-danger")
 
             $.ajax({
-                url: "<?= url('alteracaocategoria') ?>/" + id,
+                url: "<?= url('alteracaoproduto') ?>/" + id,
                 type: "GET",
                 dataType: "JSON",
                 success: function(data) {
-
                     // Update CSRF hash
                     $('[name="CSRF_token"]').val(data.token);
 
-                    $('[name="nome_categoria_alteracao"]').val(data.nome_categoria);
+                    $('[name="nome_produto_alteracao"]').val(data.nome_produto);
+                    $('[name="descricao_alteracao"]').val(data.descricao);
+                    $('[name="preco_compra_alteracao"]').val(data.preco_compra);
+                    $('[name="preco_venda_alteracao"]').val(data.preco_venda);
+                    $('[name="quantidade_disponível_alteracao"]').val(data.quantidade_disponível);
+                    $('[name="id_categoria_alteracao"]').val(data.id_categoria);
                     $('[name="id_alteracao"]').val(data.id);
 
-                    $("#modalAlterarCategoria").modal('show');
+                    $("#modalAlterarProduto").modal('show');
                 },
                 error: function(data) {
                     Swal.fire({
@@ -125,7 +136,7 @@
                         text: "Erro Inesperado",
                         icon: "error",
                     });
-                    $("#modalAlterarCategoria").modal('hide');
+                    $("#modalAlterarProduto").modal('hide');
                 }
             });
 
@@ -135,7 +146,7 @@
         $('#btSalvarAlteracao').on('click', function() {
 
             $.ajax({
-                url: "<?= url('gravaralteracaocategoria') ?>",
+                url: "<?= url('gravaralteracaoproduto') ?>",
                 type: "POST",
                 data: $('#formAltercao').serialize(),
                 dataType: "JSON",
@@ -148,10 +159,10 @@
                     {
                         Swal.fire({
                             title: "Sucesso",
-                            text: "Categoria Alterada Com Sucesso",
+                            text: "Produto Alterada Com Sucesso",
                             icon: "success",
                         });
-                        $("#modalAlterarCategoria").modal('hide');
+                        $("#modalAlterarProduto").modal('hide');
 
                     } else {
 
@@ -166,7 +177,7 @@
                         text: "Erro Inesperado",
                         icon: "error",
                     });
-                    $("#modalAlterarCategoria").modal('hide');
+                    $("#modalAlterarProduto").modal('hide');
 
                 }
             });
@@ -194,7 +205,7 @@
                 if (result.isConfirmed) {
 
                     $.ajax({
-                        url: "<?= url('excluircategoria') ?>/" + id,
+                        url: "<?= url('excluirproduto') ?>/" + id,
                         type: "GET",
                         dataType: "JSON",
                         success: function(data) {
