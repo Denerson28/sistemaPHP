@@ -1,12 +1,7 @@
 <head>
+    <link href="<?= URL_CSS ?>login.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="#">
-    <link href="<?= URL_CSS ?>bootstrap.min.css" rel="stylesheet">
-    <link href="<?= URL_CSS ?>login.css" rel="stylesheet">
-    <link href="<?= URL_JS ?>sweetalert2/sweetalert2.css" rel="stylesheet">
-    <link href="<?= FONTAWESOME ?>" rel="stylesheet">
-    <title>CompraVenda</title>
 </head>
 
 <?php
@@ -25,21 +20,27 @@ if (isset($data['mensagens'])) { ?>
 <?php
 }
 ?>
-<form action="<?= URL_BASE . '/logar' ?>" method="post">
-  <div class="col-6">
-    
-    <div class="form-group">
-      <label for="cpf">CPF</label>
-      <input id="cpf" class="form-control" type="cpf" name="cpf" value="" placeholder="Digite aqui seu CPF">
-    </div>
-    <div class="form-group">
-      <label for="senha">Senha</label>
-      <input id="senha" class="form-control" type="password" name="senha" value="" placeholder="Digite aqui sua senha">
-    </div>
+<div class="space"></div>
+<div class="container"></div>
+<div class="row mb-3 mt-5" >
+  <div class="col-4 offset-4 card bg-ligth">
+    <form action="<?= URL_BASE . '/logar' ?>" method="post" class="needs-validation">
+    <h1>Login</h1> 
+      <div class="col-6">
+        
+        <p>
+          <label for="cpf">CPF</label>
+          <input id="cpf" class="form-control" type="cpf" name="cpf" value="" placeholder="Digite aqui seu CPF">
+        </p>
+        <p
+          <label for="senha">Senha</label>
+          <input id="senha" class="form-control" type="password" name="senha" value="" placeholder="Digite aqui sua senha">
+        </p>
 
-    <div class="form-group">
-    <button type="submit" class="btn btn-primary">Logar</button>
-    </div>
-
+        <p>
+        <button type="submit" class="btn btn-primary">Logar</button>
+        </p>
+      </div>
+    </form>
   </div>
-</form>
+</div>
