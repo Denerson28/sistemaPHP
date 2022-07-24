@@ -12,14 +12,14 @@ class AcessoRestrito extends BaseController
         //'email' => 'trim|sanitize_email',
         'cpf' => 'trim',
         'senha' => 'trim|sanitize_string',
-        'captcha' => 'trim|sanitize_string'
+
     ];
 
     protected $rules = [
         //'email'    => 'required|min_len,8|max_len,255',
         'cpf' => 'required',
         'senha'  => 'required',
-        'captcha'  => 'required|validar_CAPTCHA_CODE'
+
     ];
 
 
@@ -30,23 +30,14 @@ class AcessoRestrito extends BaseController
 
     public function login()
     {
-        // gera o CAPTCHA_CODE e guarda na sessão 
-        $_SESSION['CAPTCHA_CODE'] = Funcoes::gerarCaptcha();
-        $imagem = Funcoes::gerarImgCaptcha($_SESSION['CAPTCHA_CODE']);
-        // gera o CSRF_token e guarda na sessão
-        $_SESSION['CSRF_token'] = Funcoes::gerarTokenCSRF();
-        $data = ['imagem' => $imagem];
         // chama a view
-        $this->view('acessorestrito/login', $data);
+        $this->view('acessorestrito/login');
     }
 
     public function logar()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") :
 
-            Validador::add_validator("validar_CAPTCHA_CODE", function ($field, $input) {
-                return $input['captcha'] === $_SESSION['CAPTCHA_CODE'];
-            }, 'Código de Segurança incorreto.');
 
             $validacao = new Validador("pt-br");
 
@@ -54,8 +45,6 @@ class AcessoRestrito extends BaseController
             $post_validado = $validacao->validate($post_filtrado, $this->rules);
 
             if ($post_validado === true) :  // verificar login
-
-                if ($_POST['CSRF_token'] == $_SESSION['CSRF_token']) :
 
                     $senha_enviada = $_POST['senha'];
 
@@ -75,9 +64,6 @@ class AcessoRestrito extends BaseController
                     endif;
 
                     if ($senha_enviada == $senha_bd) :
-
-                        // apagar CAPTCHA_CODE
-                        unset($_SESSION['CAPTCHA_CODE']);
                         
                         // regenerar a sessão
                         session_regenerate_id(true);
@@ -97,27 +83,11 @@ class AcessoRestrito extends BaseController
 
                     else :
                         $mensagem = ["CPF e/ou Senha incorreta"];
-                        $_SESSION['CAPTCHA_CODE'] = Funcoes::gerarCaptcha(); // guarda o captcha_code na sessão 
-                        $imagem = Funcoes::gerarImgCaptcha($_SESSION['CAPTCHA_CODE']);
-                        $_SESSION['CSRF_token'] = Funcoes::gerarTokenCSRF();
-                        $data = [
-                            'imagem' => $imagem,
-                            'mensagens' => $mensagem
-                        ];
-                        
-                        $this->view('acessorestrito/login', $data);
+                        $this->view('acessorestrito/login');
                     endif;
-
-                else :  // falha CSRF_token"
-                    die("Erro 404");
-                endif;
             else : // erro de validação
                 $mensagem = $validacao->get_errors_array();
-                $_SESSION['CAPTCHA_CODE'] = Funcoes::gerarCaptcha(); // guarda o captcha_code na sessão 
-                $imagem = Funcoes::gerarImgCaptcha($_SESSION['CAPTCHA_CODE']);
-                $_SESSION['CSRF_token'] = Funcoes::gerarTokenCSRF();
                 $data = [
-                    'imagem' => $imagem,
                     'mensagens' => $mensagem
                 ];
 
