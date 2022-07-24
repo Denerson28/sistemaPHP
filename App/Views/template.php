@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#">
     <link href="<?= URL_CSS ?>bootstrap.min.css" rel="stylesheet">
+    <link href="<?= URL_CSS ?>body.css" rel="stylesheet">
     <link href="<?= URL_JS ?>sweetalert2/sweetalert2.css" rel="stylesheet">
     <link href="<?= FONTAWESOME ?>" rel="stylesheet">
     <title>CompraVenda</title>

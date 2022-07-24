@@ -1,3 +1,14 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <link href="<?= URL_CSS ?>bootstrap.min.css" rel="stylesheet">
+    <link href="<?= URL_CSS ?>login.css" rel="stylesheet">
+    <link href="<?= URL_JS ?>sweetalert2/sweetalert2.css" rel="stylesheet">
+    <link href="<?= FONTAWESOME ?>" rel="stylesheet">
+    <title>CompraVenda</title>
+</head>
+
 <?php
 if (isset($data['mensagens'])) { ?>
   <div class="col-6">
@@ -15,7 +26,6 @@ if (isset($data['mensagens'])) { ?>
 }
 ?>
 <form action="<?= URL_BASE . '/logar' ?>" method="post">
-  <input id="CSRF_token" type="hidden" name="CSRF_token" value="<?= $_SESSION['CSRF_token'] ?>">
   <div class="col-6">
     
     <div class="form-group">
