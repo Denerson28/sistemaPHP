@@ -28,7 +28,19 @@
                 if (isset($_SESSION['id'])) : ?>
                     <?php if($_SESSION['papelFuncionario'] == 0): ?>
                         <!-- Links para acesso de admin -->
+                        <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Funcionarios">Funcionarios</a>
                         
+                        <?php elseif($_SESSION['papelFuncionario'] == 1): ?>
+                            <!-- Links para acesso de vendedor -->
+                            <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Clientes">Clientes</a>
+                            <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Vendas">Vendas</a>
+    
+                        <?php elseif($_SESSION['papelFuncionario'] == 2): ?>
+                            <!-- Links para acesso de comprador -->
+                            <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Fornecedores">Fornecedores</a>
+                            <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Categorias">Categorias</a>
+                            <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Compras">Compras</a>
+                            <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Produtos">Produtos</a>
                     <?php elseif($_SESSION['papelFuncionario'] == 1): ?>
                         <!-- Links para acesso de vendedor -->
                         <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Clientes">Clientes</a>

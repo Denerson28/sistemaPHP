@@ -73,6 +73,19 @@ $route->get("/alteracaoproduto/{id}", "Produto:alterarProduto");
 $route->post("/gravaralteracaoproduto", "Produto:gravarAlterar");
 $route->get("/excluirproduto/{id}", "Produto:excluirProduto");
 /**
+ * parte restrita - administradores
+ */
+$route->get("/DashboardAdministrador", "DashboardAdministrador:index");
+//CRUD Funcionarios
+$route->get("/Funcionarios", "Funcionario:index");
+$route->get("/incluirfuncionario", "Funcionario:incluir");
+$route->post("/salvarinclusaofuncionario", "Funcionario:gravarInclusao");
+$route->get("/navegafuncionario/{numPag}", "Funcionario:ajax_lista");
+$route->get("/alteracaofuncionario/{id}", "Funcionario:alterarFuncionario");
+$route->post("/gravaralteracaofuncionario", "Funcionario:gravarAlterar");
+$route->get("/excluirfuncionario/{id}", "Funcionario:excluirFuncionario");
+
+/**
  * ERROR
  */
 $route->group("ops");
