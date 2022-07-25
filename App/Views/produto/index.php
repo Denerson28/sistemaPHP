@@ -1,15 +1,22 @@
 <!-- Button trigger modal -->
-<button type="button" id="btIncluir" class="btn btn-danger mb-1">
-    Novo
-</button>
+<?php if($_SESSION['papelFuncionario'] != 0) { ?>
+    <button type="button" id="btIncluir" class="btn btn-danger mb-1">
+        Novo
+    </button>
+<?php }?>
+
 
 <table class="table table-light">
     <thead class="thead-light">
         <tr>
             <th>Nome do Produto</th>
             <th>descricao</th>
+            <th>Quantidade Disponível</th>
             <th>Liberado Venda</th>
-            <th>Ação</th>
+            <?php if($_SESSION['papelFuncionario'] != 0) { ?>
+                <th>Ação</th>
+            <?php }?>
+
         </tr>
     </thead>
     <tbody name="contudoTabela" id="contudoTabela">
@@ -56,6 +63,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="button" id="btSalvarInclusao" class="btn btn-primary">Salvar</button>
             </div>
+            
         </div>
     </div>
 </div>

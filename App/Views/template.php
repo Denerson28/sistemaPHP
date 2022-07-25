@@ -29,6 +29,7 @@
                     <?php if($_SESSION['papelFuncionario'] == 0): ?>
                         <!-- Links para acesso de admin -->
                         <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Funcionarios">Funcionarios</a>
+                        <a class="nav-item nav-link text-success" href="<?= URL_BASE ?>/Produtos">Relatório de Produtos</a>
                         
                         <?php elseif($_SESSION['papelFuncionario'] == 1): ?>
                             <!-- Links para acesso de vendedor -->
