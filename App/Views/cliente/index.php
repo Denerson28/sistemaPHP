@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" id="btIncluir" class="btn btn-outline-primary mb-1">
+<button type="button" id="btIncluir" class="btn btn-danger mb-1">
     Novo
 </button>
 

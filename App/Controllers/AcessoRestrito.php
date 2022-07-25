@@ -74,7 +74,7 @@ class AcessoRestrito extends BaseController
                         $_SESSION['papelFuncionario'] = $funcionario['papel'];
                        
                         if($funcionario['papel'] == 0):
-                            Funcoes::redirect("DashboardAdmin");  // acesso área restrita do admin
+                            Funcoes::redirect("DashboardAdministrador");  // acesso área restrita do admin
                         elseif($funcionario['papel'] == 1):
                             Funcoes::redirect("DashboardVendedor");  // acesso área restrita do vendedor
                         elseif($funcionario['papel'] == 2):
